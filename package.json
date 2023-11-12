@@ -1,5 +1,4 @@
 {
-  "type": "module",
   "name": "svg-generator",
   "version": "1.0.0",
   "description": "Node application that generates svg files using inquirer",
@@ -16,5 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "inquirer": "^9.2.12"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
