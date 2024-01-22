@@ -1,3 +1,4 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"> 
-		<circle cx="98" cy="98" r="98" fill="red" /><text x="57" y="130" font-family="Arial" font-size="90" fill="#FFFFFF">svg</text> 
-		</svg>
+  <circle cx="90" cy="90" r="90" fill="red" />
+            <text x="45" y="102.5" font-family="Arial" font-size="50" fill="#FFFFFF">TST</text> 
+</svg>

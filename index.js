@@ -4,9 +4,9 @@ const path = require("path");
 const Rectangle = require("./lib/rectangle");
 const Circle = require("./lib/circle");
 const Square = require("./lib/square");
+const Text = require("./lib/text").Text;
 const { validateTextFunction } = require("./lib/text");
 const { validateColorFunction } = require("./lib/text");
-const Text = require("./lib/text").Text;
 
 const defaultOutputDirectory = "./SVG-output";
 
@@ -60,32 +60,35 @@ inquirer
 			});
 		}
 
-		return inquirer
-			.prompt(shapePrompts)
-			.then(shapeDimensions => ({ shapeType, color, text, shapeDimensions }));
+		return inquirer.prompt(shapePrompts).then(shapeDimensions => ({
+			shapeType,
+			color,
+			text,
+			shapeDimensions,
+		}));
 	})
 	.then(({ shapeType, color, text, shapeDimensions }) => {
 		let shape;
+		let textElement;
 
 		switch (shapeType) {
 			case "rectangle":
-				shape = new Rectangle(shapeDimensions.width, shapeDimensions.height, color);
+				shape = new Rectangle(shapeDimensions.width, shapeDimensions.height, color, text);
 				break;
 			case "circle":
-				shape = new Circle(shapeDimensions.radius, color);
+				shape = new Circle(shapeDimensions.radius, color, text);
 				break;
 			case "square":
-				shape = new Square(shapeDimensions.side, color);
+				shape = new Square(shapeDimensions.side, color, text);
 				break;
 			default:
 				console.error("Invalid shape type");
-				return;
+				throw new Error("Invalid shape type");
 		}
-
-		const textElement = new Text(text);
 		const svgContent = `<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"> 
-		${shape.generateSVG() + textElement.generateSVG()} 
-		</svg>`;
+  ${shape.generateSVG()} 
+</svg>`;
+
 		const fileName = `${shapeType}.svg`;
 		const outputPath = path.join(defaultOutputDirectory, fileName);
 
